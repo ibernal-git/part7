@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../reducers/userReducer'
 import { useField, useForm } from '../hooks'
+import { Button, Form } from 'react-bootstrap'
 
 const LoginForm = () => {
   const username = useField('text')
@@ -16,17 +17,21 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        username
-        <input id='username' {...username} />
-      </div>
-      <div>
-        password
-        <input id='password' {...password} />
-      </div>
-      <button id='login-button' type='submit'>login</button>
-    </form>
+    <Form onSubmit={handleSubmit} className='bg-light p-5 clearfix'>
+      <Form.Group>
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
+          {...username}
+        />
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
+          {...password}
+        />
+        <Button variant='primary' type='submit' className='mt-3 float-right'>
+          login
+        </Button>
+      </Form.Group>
+    </Form>
   )
 }
 

@@ -6,6 +6,7 @@ import { initializeBlogs, removeBlog } from '../reducers/blogReducer'
 import {
   Link
 } from 'react-router-dom'
+import { Table } from 'react-bootstrap'
 
 const Blogs = () => {
   const dispatch = useDispatch()
@@ -26,17 +27,6 @@ const Blogs = () => {
       dispatch(removeBlog(blog))
     }
   }
-  const removeButton = {
-    paddingTop: 10
-  }
-  const blogStyle = {
-    border: '2px solid black',
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 2,
-    marginTop: 5,
-    marginBottom: 5
-  }
 
   return (
     <>
@@ -44,14 +34,31 @@ const Blogs = () => {
         <BlogForm blogForm={blogForm} />
       </Togglable>
       <div id='blogs'>
-        {blogs.map(blog =>
-          (
-            <div key={blog.id} style={blogStyle}>
-              <Link to={`blogs/${blog.id}`}>{blog.title}</Link>
-              {username === blog.user.username ? <div style={removeButton}><button className='remove-button' onClick={() => handleRemove(blog)}>Remove</button></div> : null}
-            </div>
-          )
-        )}
+        <Table striped>
+          <tbody>
+            {blogs.map(blog =>
+              <tr key={blog.id}>
+                <td>
+                  <div>
+                    <Link to={`blogs/${blog.id}`}>{blog.title}</Link>
+
+                  </div>
+                </td>
+                <td>
+                  {blog.user.name}
+                </td>
+                <td>
+                  {
+                      username === blog.user.username
+                        ? <div><button className='remove-button' onClick={() => handleRemove(blog)}>Remove</button></div>
+                        : null
+                    }
+                </td>
+              </tr>
+
+            )}
+          </tbody>
+        </Table>
       </div>
     </>
   )

@@ -6,7 +6,7 @@ const Notification = () => {
 
   if (notification.show === true) {
     return (
-      <div className={notification.isError ? 'error' : 'info'}>
+      <div className={notification.isError ? 'error bg-danger text-white' : 'info bg-info text-white'}>
         {notification.message}
       </div>
     )

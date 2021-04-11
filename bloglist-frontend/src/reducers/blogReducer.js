@@ -43,6 +43,7 @@ export const createBlog = (blogObject) => {
         type: 'ADD_BLOG',
         data: newBlog
       })
+      dispatch(setNotification('blog created', false))
     } catch {
       dispatch(setNotification('the blog cannot be created', true))
     }
@@ -56,6 +57,7 @@ export const updateBlog = (blog) => {
         type: 'UPDATE_BLOG',
         data: updatedBlog
       })
+      dispatch(setNotification('blog updated', false))
     } catch {
       dispatch(setNotification('the blog cannot be updated', true))
     }
@@ -69,6 +71,7 @@ export const createComment = (blogId, comment) => {
         type: 'CREATE_COMMENT_BLOG',
         data: newBlog
       })
+      dispatch(setNotification('comment created', false))
     } catch {
       dispatch(setNotification('the blog cannot be updated', true))
     }
@@ -82,6 +85,7 @@ export const removeBlog = (blog) => {
         type: 'REMOVE_BLOG',
         data: blog
       })
+      dispatch(setNotification('blog removed', false))
     } catch (e) {
       dispatch(setNotification('the blog cannot be removed', true))
     }

@@ -29,12 +29,11 @@ const App = () => {
   if (!user && window.localStorage.getItem('loggedUser') !== null) {
     return null
   }
-
   return (
-    <div>
+    <div className='container'>
       {
         user === null
-          ? <div><h1>log in to application</h1><Notification /><LoginForm /></div>
+          ? <div className='row vh-100'><div className='m-auto col-md-6'><h1 className='text-light text-center'>log in to application</h1><Notification /><LoginForm /></div></div>
           : (
             <>
               <Router>
