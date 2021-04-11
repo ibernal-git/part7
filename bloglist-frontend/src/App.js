@@ -1,70 +1,61 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './App.css'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { initUser } from './reducers/userReducer'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
+
 import LoginForm from './components/LoginForm'
 import Blogs from './components/Blogs'
 import Notification from './components/Notification'
-import blogService from './services/blogs'
-import loginService from './services/login'
+import Menu from './components/Menu'
+import BlogDetails from './components/BlogDetails'
+import UserDetails from './components/UserDetails'
+import Users from './components/Users'
+import Header from './components/Header'
 
 const App = () => {
-  const [user, setUser] = useState(null)
-
-  const [message, setMessage] = useState(null)
-  const [isError, setIsError] = useState(false)
+  const dispatch = useDispatch()
+  const user = useSelector(({ user }) => user)
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      blogService.setToken(user.token)
-    }
-  }, [])
+    dispatch(initUser())
+  }, [dispatch])
 
-  const login = async ({ username, password }) => {
-    try {
-      const user = await loginService.login({
-        username, password
-
-      })
-      blogService.setToken(user.token)
-      window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
-      )
-
-      setUser(user)
-    } catch (exception) {
-      handleNotification('wrong credentials', true)
-    }
-  }
-
-  const handleNotification = (message, isError) => {
-    setIsError(isError)
-    setMessage(message)
-    setTimeout(() => setMessage(null), 5000)
-  }
-
-  const logout = () => {
-    setUser(null)
-    window.localStorage.removeItem('loggedUser')
+  if (!user && window.localStorage.getItem('loggedUser') !== null) {
+    return null
   }
 
   return (
     <div>
       {
         user === null
-          ? <div><h1>log in to application</h1><Notification message={message} isError={isError} /><LoginForm login={login} /></div>
+          ? <div><h1>log in to application</h1><Notification /><LoginForm /></div>
           : (
-            <div>
-              <h1>Blogs</h1>
-              <Notification message={message} isError={isError} />
-              <p>{user.name} logged in
-                <button onClick={logout}>
-                  logout
-                </button>
-              </p>
-              <Blogs username={user.username} setMessage={setMessage} handleNotification={handleNotification} />
-            </div>
+            <>
+              <Router>
+                <Menu />
+                <Header />
+                <Switch>
+                  <Route path='/users/:id'>
+                    <UserDetails />
+                  </Route>
+                  <Route path='/users'>
+                    <Users />
+                  </Route>
+                  <Route path='/blogs/:id'>
+                    <BlogDetails />
+                  </Route>
+                  <Route path='/'>
+                    <Blogs />
+                  </Route>
+                </Switch>
+              </Router>
+            </>
             )
       }
     </div>

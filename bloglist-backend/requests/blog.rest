@@ -6,14 +6,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld
 
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ldyIsImlkIjoiNjA2OWNkN2Y1ODJiNjYxZjFhNDk5MDQ2IiwiaWF0IjoxNjE3NTQ2NjMyLCJleHAiOjE2MjAxMzg2MzJ9.UBrDQLpvTw80yLuLVlYV88dk1PFmfj5Uy-GUa0IY4pM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImliZXJuYWwiLCJpZCI6IjYwNzJiZjE1NWIyOGQ4MTkyZTc3MGM1YiIsImlhdCI6MTYxODEzMjc2NCwiZXhwIjoxNjIwNzI0NzY0fQ.3iDinSzY5rQt1pL9K9YN3e8sKi6_ejXVyxkvRkT9iKY
 
 {
-  "title": "new blog by new",
-  "author": "new",
-  "url": "http://test1.com/test1",
-  "likes": 0,
-  "userId": "6069cd7f582b661f1a499046"
+  "title": "new blog 3 by Imanol Bernal",
+  "author": "cau",
+  "url": "http://test3.com/test3"
 }
 
 ###
@@ -31,3 +29,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImliZ
 DELETE http://localhost:3001/api/blogs/6065f764511d60607f43bda3
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImliZXJuYWwiLCJpZCI6IjYwNjVmNzRmNTExZDYwNjA3ZjQzYmRhMiIsImlhdCI6MTYxNzMwMDEyMCwiZXhwIjoxNjE3MzAzNzIwfQ.HuWzzRzdiSFtn8ExpCxd1xZ1w8yzHkMa414hKyjRvaI
+
+###
+
+POST http://localhost:3001/api/blogs/6072bf395b28d8192e770c5c/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImliZXJuYWwiLCJpZCI6IjYwNjVmNzRmNTExZDYwNjA3ZjQzYmRhMiIsImlhdCI6MTYxNzQ2MjQ5MywiZXhwIjoxNjIwMDU0NDkzfQ.RX2D57mzSzwcR22GovVU5nhGBBORHtwyCwmFhhw96hs
+
+{
+  "content": "Buhhh"
+}

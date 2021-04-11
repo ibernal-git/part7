@@ -30,6 +30,13 @@ const update = blog => {
   const response = axios.put(`${baseUrl}/${blog.id}`, blog, config)
   return response.then(response => response.data)
 }
+const createComment = (blogId, comment) => {
+  const config = {
+    headers: { Authorization: token }
+  }
+  const response = axios.post(`${baseUrl}/${blogId}/comments`, comment, config)
+  return response.then(response => response.data)
+}
 const remove = blog => {
   const config = {
     headers: { Authorization: token }
@@ -40,4 +47,4 @@ const remove = blog => {
 }
 
 // eslint-disable-next-line
-export default { getAll, setToken, create, update, remove }
+export default { getAll, setToken, create, update, remove, createComment }

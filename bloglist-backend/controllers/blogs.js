@@ -17,10 +17,10 @@ blogRouter.get('/', autenticate, async (_, response) => {
  * Posts a new blog to the database
  */
 blogRouter.post('/', autenticate, async (request, response) => {
-  const { likes = 0, ...newBlog } = request.body
+  const { likes = 0, comments = [], ...newBlog } = request.body
   const user = await User.findById(request.token.id)
 
-  const blog = new Blog({ ...newBlog, likes, user: user._id })
+  const blog = new Blog({ ...newBlog, likes, comments, user: user._id })
   const savedBlog = await blog.save().then(b => b.populate('user', { username: 1, name: 1 }).execPopulate())
   user.blogs = user.blogs.concat(savedBlog._id)
   await user.save()
@@ -29,7 +29,7 @@ blogRouter.post('/', autenticate, async (request, response) => {
 })
 
 /**
- * DELETE /api/blogs
+ * DELETE /api/blogs/:id
  * Deletes a blog from the database
  */
 blogRouter.delete('/:id', autenticate, async (request, response, next) => {
@@ -52,7 +52,7 @@ blogRouter.delete('/:id', autenticate, async (request, response, next) => {
 })
 
 /**
- * Put /api/blogs
+ * Put /api/blogs/:id
  * Updates a blog
  */
 blogRouter.put('/:id', autenticate, async (request, response) => {
@@ -62,6 +62,23 @@ blogRouter.put('/:id', autenticate, async (request, response) => {
     likes: request.body.likes
   }
   const result = await Blog.findByIdAndUpdate(id, newInfo, { new: true })
+  response.status(200).json(result)
+})
+
+module.exports = blogRouter
+
+/**
+ * Post /api/blogs/:id/comments
+ * Post a comment for a blog
+ */
+blogRouter.post('/:id/comments', autenticate, async (request, response) => {
+  const id = request.params.id
+  const newComment = {
+    content: request.body.content
+  }
+  const blog = await Blog.findById(id)
+  blog.comments.push(newComment)
+  const result = await blog.save()
   response.status(200).json(result)
 })
 
