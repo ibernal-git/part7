@@ -2,11 +2,12 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../reducers/userReducer'
 import { useField, useForm } from '../hooks'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Container, Form } from 'react-bootstrap'
+import Notification from './Notification'
 
 const LoginForm = () => {
   const username = useField('text')
-  const password = useField('text')
+  const password = useField('password')
   const form = useForm([username, password])
   const dispatch = useDispatch()
 
@@ -17,21 +18,33 @@ const LoginForm = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit} className='bg-light p-5 clearfix'>
-      <Form.Group>
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          {...username}
-        />
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          {...password}
-        />
-        <Button variant='primary' type='submit' className='mt-3 float-right'>
-          login
-        </Button>
-      </Form.Group>
-    </Form>
+    <Container>
+      <div className='row vh-100'>
+        <div className='m-auto col-xs-6 bg-light p-5'>
+          <h1 className='text-dark text-center text-uppercase'>log in to application</h1>
+          <Notification />
+          <Form onSubmit={handleSubmit} className='clearfix p-2'>
+            <Form.Group>
+              <Form.Control
+                placeholder='Username'
+                {...username}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                placeholder='Password'
+                {...password}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Button variant='primary' type='submit' className='mt-3 float-right'>
+                login
+              </Button>
+            </Form.Group>
+          </Form>
+        </div>
+      </div>
+    </Container>
   )
 }
 

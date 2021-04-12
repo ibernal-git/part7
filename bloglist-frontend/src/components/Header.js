@@ -3,8 +3,7 @@ import Notification from './Notification'
 
 const Header = () => {
   return (
-    <div>
-      <h1 className='text-light'>Blog app</h1>
+    <div className='p-4 col-md-12'>
       <Notification />
     </div>
   )

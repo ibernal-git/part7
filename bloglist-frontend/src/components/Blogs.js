@@ -6,7 +6,7 @@ import { initializeBlogs, removeBlog } from '../reducers/blogReducer'
 import {
   Link
 } from 'react-router-dom'
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
 
 const Blogs = () => {
   const dispatch = useDispatch()
@@ -30,10 +30,10 @@ const Blogs = () => {
 
   return (
     <>
-      <Togglable buttonLabel='new blog' ref={blogForm}>
+      <Togglable buttonLabel='New blog' ref={blogForm}>
         <BlogForm blogForm={blogForm} />
       </Togglable>
-      <div id='blogs'>
+      <div id='blogs' className='col-md-12'>
         <Table striped>
           <tbody>
             {blogs.map(blog =>
@@ -50,7 +50,7 @@ const Blogs = () => {
                 <td>
                   {
                       username === blog.user.username
-                        ? <div><button className='remove-button' onClick={() => handleRemove(blog)}>Remove</button></div>
+                        ? <Button variant='danger' onClick={() => handleRemove(blog)} className='float-right'>Remove</Button>
                         : null
                     }
                 </td>

@@ -26,8 +26,8 @@ const BlogForm = ({ blogForm }) => {
   }
 
   return (
-    <div className='col-md-6 m-4'>
-      <h2 className='text-secondary'>create new</h2>
+    <div>
+      <h2 className='text-secondary text-uppercase'>create new</h2>
       <Form onSubmit={handleSubmit} className='flex-v-center'>
         <Form.Group>
           <Form.Label>Title:</Form.Label>
@@ -36,8 +36,8 @@ const BlogForm = ({ blogForm }) => {
           <Form.Control {...author} />
           <Form.Label>Url:</Form.Label>
           <Form.Control {...url} />
-          <Button variant='primary' type='submit' className='mt-3 float-right'>
-            create
+          <Button variant='info' type='submit' className='mt-3 float-right'>
+            Create
           </Button>
         </Form.Group>
       </Form>
