@@ -34,7 +34,15 @@ const Blogs = () => {
         <BlogForm blogForm={blogForm} />
       </Togglable>
       <div id='blogs' className='col-md-12'>
-        <Table striped>
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>User</th>
+              <th />
+            </tr>
+          </thead>
           <tbody>
             {blogs.map(blog =>
               <tr key={blog.id}>
@@ -45,7 +53,10 @@ const Blogs = () => {
                   </div>
                 </td>
                 <td>
-                  {blog.user.name}
+                  {blog.author}
+                </td>
+                <td>
+                  <Link to={`users/${blog.user.id}`}> {blog.user.name}</Link>
                 </td>
                 <td>
                   {

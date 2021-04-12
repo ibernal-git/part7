@@ -15,7 +15,7 @@ const Users = () => {
   return (
     <div className='col-md-12 p-4'>
       <h2 className='text-secondary text-uppercase'>Users</h2>
-      <Table striped bordered hover className='col-md-12'>
+      <Table striped bordered className='col-md-12'>
         <thead>
           <tr>
             <th />
