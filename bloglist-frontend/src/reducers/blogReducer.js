@@ -7,7 +7,7 @@ const blogReducer = (state = [], action) => {
       return action.data
     }
     case 'ADD_BLOG': {
-      return state.concat(action.data)
+      return [...state, action.data]
     }
     case 'UPDATE_BLOG': {
       return state.map(b => (b.id === action.data.id ? { ...b, likes: action.data.likes } : b))
